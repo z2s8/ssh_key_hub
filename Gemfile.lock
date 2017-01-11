@@ -1,0 +1,45 @@
+GIT
+  remote: https://github.com/z2s8/gitlab
+  revision: 1090d9d2ecff253132e949d50efe7fb8b5ce6a3e
+  specs:
+    gitlab (3.7.0)
+      httparty
+      terminal-table (= 1.7.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    addressable (2.5.0)
+      public_suffix (~> 2.0, >= 2.0.2)
+    faraday (0.10.0)
+      multipart-post (>= 1.2, < 3)
+    httparty (0.14.0)
+      multi_xml (>= 0.5.2)
+    json (1.8.3)
+    multi_xml (0.5.5)
+    multipart-post (2.0.0)
+    octokit (4.6.2)
+      sawyer (~> 0.8.0, >= 0.5.3)
+    public_suffix (2.0.4)
+    retries (0.0.5)
+    runscope-rb (0.0.4)
+    sawyer (0.8.1)
+      addressable (>= 2.3.5, < 2.6)
+      faraday (~> 0.8, < 1.0)
+    terminal-table (1.7.1)
+      unicode-display_width (~> 1.1.1)
+    unicode-display_width (1.1.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler
+  gitlab!
+  json
+  octokit (~> 4.0)
+  retries
+  runscope-rb
+
+BUNDLED WITH
+   1.12.5
