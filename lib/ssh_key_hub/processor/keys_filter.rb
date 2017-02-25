@@ -35,7 +35,7 @@ module Processor
           when :DSA
             true
           when :RSA
-            bits < 2048
+            bits < 4096
           when :EC
             bits < 256
           else
