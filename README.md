@@ -1,0 +1,36 @@
+# SSH Key Hub `version: pre-alpha!`
+This project aims to make SSH Key management easier for teams, while introducing very little overhead.
+
+## About
+- SSH Key Hub **downloads** your team members' public SSH keys from multiple providers, **filters** them, then **outputs** the keys in a customizable format.
+- It can run either on the remote server directly, or intergate with configuration management systems (such as *Ansible* and *Chef*) and ship the collected keys to servers efficently.
+- This is a **lightweight tool**, it isn't an SSH server, it just prepares the user credentials for use with common SSH servers, such as *OpenSSH*.
+
+## Example run
+```ruby
+require_relative 'provider/github'
+require_relative 'processor/keys_filter'
+
+creds = Provider::GitHub.new.keys_for_org_team 'namewip', 'Owners'
+=> {"z2s8"=>
+  <SortedSet: {"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCxY1j...Mn2zd", # RSA 1024
+               "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDEVFI...2JQ=="} # RSA 4096
+             >}
+
+Processor::KeysFilter.new(creds).reject_weak
+=> {"z2s8"=>
+  <SortedSet: {"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDEVFI...2JQ=="} # RSA 4096
+             >}
+```
+
+## Current providers
+- **GitHub:** `whole_org`, `org_team`
+- **GitLab:** `whole_group`
+- _and more coming!_
+
+## ToDo
+- Add exporters
+- Add tests
+- Package as gem
+- Create docker image
+- Improve docs
