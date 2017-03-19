@@ -22,7 +22,6 @@ GEM
       sawyer (~> 0.8.0, >= 0.5.3)
     public_suffix (2.0.4)
     retries (0.0.5)
-    runscope-rb (0.0.4)
     sawyer (0.8.1)
       addressable (>= 2.3.5, < 2.6)
       faraday (~> 0.8, < 1.0)
@@ -39,7 +38,6 @@ DEPENDENCIES
   json
   octokit (~> 4.0)
   retries
-  runscope-rb
 
 BUNDLED WITH
    1.12.5

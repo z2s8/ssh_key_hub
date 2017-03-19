@@ -1,4 +1,4 @@
-# SSH Key Hub `version: pre-alpha!`
+# SSH Key Hub `version: pre-alpha!` [`api docs`](https://z2s8.github.io/ssh_key_hub/doc/top-level-namespace.html)
 This project aims to make SSH Key management easier for teams, while introducing very little overhead.
 
 ## About
