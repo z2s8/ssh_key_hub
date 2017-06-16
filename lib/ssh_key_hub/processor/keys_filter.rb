@@ -1,3 +1,4 @@
+require 'active_support/core_ext/object'
 require_relative 'key_processor'
 
 module Processor
@@ -6,7 +7,7 @@ module Processor
     @infinity = 1.0 / 0.0
     # @param [Hash] credentials Hash with keys by username with +SortedSet+s
     def initialize(credentials={})
-      @credentials = credentials
+      @credentials = credentials.deep_dup
     end
 
     # Add new credentials to the filter
