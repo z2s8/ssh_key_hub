@@ -21,9 +21,6 @@ module SSHKeyHub::Provider
     # @param [String] group GitLab group
     # @return [Hash] Hash with keys by username with +SortedSet+s
     def keys_for_whole_group(group)
-      #@client.group_members(group).each do |member|
-      #  keys_for_user(member.username)
-      #end
       keys_for_members(@client.group_members(group))
     end
 

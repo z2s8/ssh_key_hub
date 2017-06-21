@@ -9,7 +9,7 @@ module SSHKeyHub::Exporter
       @credentials.merge!(new_creds) { |_, old_val, new_val| old_val + new_val }
     end
 
-    def export(dir_name="home")
+    def export(dir_name = 'home')
       Dir.mkdir dir_name
       Dir.chdir dir_name do
         @credentials.each do |user, keys|

@@ -6,7 +6,7 @@ module SSHKeyHub::Processor
   class KeysFilter
     @infinity = 1.0 / 0.0
     # @param [Hash] credentials Hash with keys by username with +SortedSet+s
-    def initialize(credentials={})
+    def initialize(credentials = {})
       @credentials = credentials.deep_dup
     end
 
@@ -17,11 +17,11 @@ module SSHKeyHub::Processor
     end
 
     # TODO
-    def allow(type, min_bits, max_bits=@infinity)
+    def allow(type, min_bits, max_bits = @infinity)
     end
 
     # TODO
-    def reject(type, min_bits=0, max_bits)
+    def reject(type, min_bits = 0, max_bits)
     end
 
     # Remove weak keys from credentials
