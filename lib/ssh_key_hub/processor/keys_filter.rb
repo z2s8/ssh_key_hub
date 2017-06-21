@@ -1,7 +1,7 @@
 require 'active_support/core_ext/object'
 require_relative 'key_processor'
 
-module Processor
+module SSHKeyHub::Processor
   # SSH public key filter
   class KeysFilter
     @infinity = 1.0 / 0.0

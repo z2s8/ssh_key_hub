@@ -1,7 +1,7 @@
 require 'retries'
 require 'octokit'
 
-module Provider
+module SSHKeyHub::Provider
   # GitHub SSH public key provider
   class GitHub
     # @param [Hash] options GitHub credentials for Octokit::Client

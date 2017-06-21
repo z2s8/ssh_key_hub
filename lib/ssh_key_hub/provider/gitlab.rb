@@ -2,7 +2,7 @@ require 'gitlab'
 require 'httparty'
 require 'retries'
 
-module Provider
+module SSHKeyHub::Provider
   # GitLab SSH public key provider
   class GitLab
     # @param [Hash] options GitLab credentials for Gitlab::Client

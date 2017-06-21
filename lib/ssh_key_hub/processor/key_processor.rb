@@ -1,6 +1,6 @@
 require 'net/ssh'
 
-module Processor
+module SSHKeyHub::Processor
   # SSH public key analyzer
   class KeyProcessor
     # @param [String] key public key data
