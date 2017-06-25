@@ -30,7 +30,7 @@ module SSHKeyHub::Processor
     def reject_weak
       @credentials.each do |user, keys|
         keys.delete_if do |key|
-          type, bits = Processor::KeyProcessor.new.key_type_and_bits(key)
+          type, bits = SSHKeyHub::Processor::KeyProcessor.new.key_type_and_bits(key)
           puts "testing #{type} with #{bits}"
           case type
           when :DSA
