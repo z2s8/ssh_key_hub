@@ -34,7 +34,16 @@ class Keys
   def github(org:, team: nil, **kwargs, &block)
     gh = SSHKeyHub::Provider::GitHub.new(kwargs)
     if block_given?
-      #
+      Class.new(Keys) do
+        def initialize(gh, org, team, &block)
+          puts 'inner block'
+          @credentials = gh.keys_for(org, team)
+          @self_before_instance_eval = eval "self", block.binding
+          instance_eval &block
+          puts @credentials
+          puts "endofinner kk #{@export}"
+        end
+      end.new(gh, org, team, &block)
     else
       add gh.keys_for(org, team)
     end
