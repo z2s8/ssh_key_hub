@@ -1,4 +1,5 @@
 require_relative 'provider/github'
+require_relative 'provider/gitlab'
 require_relative 'processor/keys_filter'
 
 class Keys
@@ -47,5 +48,10 @@ class Keys
     else
       add gh.keys_for(org, team)
     end
+  end
+
+  def gitlab(group:, **kwargs)
+    gl = SSHKeyHub::Provider::GitLab.new(kwargs)
+    add gl.keys_for_whole_group(group)
   end
 end

@@ -24,6 +24,19 @@ module SSHKeyHub::Provider
       keys_for_members(@client.group_members(group))
     end
 
+    # TODO
+    def keys_for_group_project(group, project)
+      #
+    end
+
+    def keys_for(group, project = nil)
+      if project.nil?
+        keys_for_whole_group(group)
+      else
+        keys_for_group_project(group, project)
+      end
+    end
+
     # @param [String] user
     # @return [Array] array of keys
     private def keys_for_user(user)
