@@ -24,7 +24,9 @@ module SSHKeyHub::Processor
       when OpenSSL::PKey::EC
         return pkey.group.degree
       else
-        raise "Unknown key type: #{pkey.class}"
+        # Currently Ed25519 keys aren't supported by Ruby's OpenSSL library
+        puts "[KeyProcessor] Unknown key type for: #{key}"
+        return -1
       end
     end
 
@@ -32,7 +34,7 @@ module SSHKeyHub::Processor
     # @return [Array<Symbol, Integer>] Array of key type and size in bits, eg. +[:RSA, 4096]+
     def key_type_and_bits(key, pkey = nil)
       pkey ||= Net::SSH::KeyFactory.load_data_public_key(key) rescue nil
-      [key_type(nil, pkey), key_bits(nil, pkey)]
+      [key_type(key, pkey), key_bits(key, pkey)]
     end
   end
 end

@@ -40,7 +40,8 @@ module SSHKeyHub::Processor
           when :EC
             bits < 256
           else
-            true
+            puts "[KeysFilter] Allowing UNKNOWN key #{key} for #{user}"
+            false
           end
         end
       end
