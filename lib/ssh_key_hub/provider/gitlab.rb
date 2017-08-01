@@ -2,7 +2,7 @@ require 'gitlab'
 require 'httparty'
 require 'retries'
 
-module Provider
+module SSHKeyHub::Provider
   # GitLab SSH public key provider
   class GitLab
     # @param [Hash] options GitLab credentials for Gitlab::Client
@@ -21,10 +21,23 @@ module Provider
     # @param [String] group GitLab group
     # @return [Hash] Hash with keys by username with +SortedSet+s
     def keys_for_whole_group(group)
-      #@client.group_members(group).each do |member|
-      #  keys_for_user(member.username)
-      #end
       keys_for_members(@client.group_members(group))
+    end
+
+    # @param (see #keys_for_whole_group)
+    # @param [String] GitLab project
+    # @return (see #keys_for_whole_group)
+    def keys_for_group_project(group, project)
+      users = @client.team_members "#{group}/#{project}"
+      keys_for_members users
+    end
+
+    def keys_for(group, project = nil)
+      if project.nil?
+        keys_for_whole_group(group)
+      else
+        keys_for_group_project(group, project)
+      end
     end
 
     # @param [String] user

@@ -1,12 +1,13 @@
+require 'active_support/core_ext/object'
 require_relative 'key_processor'
 
-module Processor
+module SSHKeyHub::Processor
   # SSH public key filter
   class KeysFilter
     @infinity = 1.0 / 0.0
     # @param [Hash] credentials Hash with keys by username with +SortedSet+s
-    def initialize(credentials={})
-      @credentials = credentials
+    def initialize(credentials = {})
+      @credentials = credentials.deep_dup
     end
 
     # Add new credentials to the filter
@@ -16,11 +17,11 @@ module Processor
     end
 
     # TODO
-    def allow(type, min_bits, max_bits=@infinity)
+    def allow(type, min_bits, max_bits = @infinity)
     end
 
     # TODO
-    def reject(type, min_bits=0, max_bits)
+    def reject(type, min_bits = 0, max_bits)
     end
 
     # Remove weak keys from credentials
@@ -29,7 +30,7 @@ module Processor
     def reject_weak
       @credentials.each do |user, keys|
         keys.delete_if do |key|
-          type, bits = Processor::KeyProcessor.new.key_type_and_bits(key)
+          type, bits = SSHKeyHub::Processor::KeyProcessor.new.key_type_and_bits(key)
           puts "testing #{type} with #{bits}"
           case type
           when :DSA
@@ -39,7 +40,8 @@ module Processor
           when :EC
             bits < 256
           else
-            true
+            puts "[KeysFilter] Allowing UNRECOGNIZED key #{key} for #{user}"
+            false
           end
         end
       end
