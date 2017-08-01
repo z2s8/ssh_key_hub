@@ -7,11 +7,33 @@ This project aims to make SSH Key management easier for teams, while introducing
 - This is a **lightweight tool**, it isn't an SSH server, it just prepares the user credentials for use with common SSH servers, such as *OpenSSH*.
 
 ## Example run
-```ruby
-require_relative 'provider/github'
-require_relative 'processor/keys_filter'
 
-creds = Provider::GitHub.new.keys_for_org_team 'namewip', 'Owners'
+### Using the DSL
+
+```ruby
+require 'ssh_key_hub'
+require 'ssh_key_hub/dsl'
+
+Keys.new do
+  # get keys from gitlab:
+  gitlab group: 'gitlab-org', project: 'gitlab-ce', private_token: ENV['GITLAB_TOKEN']
+  
+  # get keys from github and then filter these keys only:
+  github org: 'namewip', access_token: ENV['GITHUB_TOKEN'] do
+    reject_weak
+  end
+
+  # export all keys regardless of origin:
+  export
+end
+```
+
+### Using the lower level API
+
+```ruby
+require_relative 'ssh_key_hub'
+
+creds = SSHKeyHub::Provider::GitHub.new(access_token: ENV['GITHUB_TOKEN']).keys_for_org_team 'namewip', 'Owners'
 => {"z2s8"=>
   <SortedSet: {"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCxY1j...Mn2zd", # RSA 1024
                "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDEVFI...2JQ=="} # RSA 4096
@@ -24,8 +46,8 @@ Processor::KeysFilter.new(creds).reject_weak
 ```
 
 ## Current providers
-- **GitHub:** `whole_org`, `org_team`
-- **GitLab:** `whole_group`
+- **GitHub:** _whole organization_, _organization team_
+- **GitLab:** _whole group_, _group project_
 - _and more coming!_
 
 ## ToDo
