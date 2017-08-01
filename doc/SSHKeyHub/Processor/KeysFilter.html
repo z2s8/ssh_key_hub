@@ -4,31 +4,31 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>
-  Class: Processor::KeysFilter
+  Class: SSHKeyHub::Processor::KeysFilter
   
     &mdash; Documentation by YARD 0.9.5
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" charset="utf-8" />
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" charset="utf-8" />
 
 <script type="text/javascript" charset="utf-8">
-  pathId = "Processor::KeysFilter";
-  relpath = '../';
+  pathId = "SSHKeyHub::Processor::KeysFilter";
+  relpath = '../../';
 </script>
 
 
-  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
 
-  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
 
 
   </head>
   <body>
     <div class="nav_wrap">
-      <iframe id="nav" src="../class_list.html"></iframe>
+      <iframe id="nav" src="../../class_list.html"></iframe>
       <div id="resizer"></div>
     </div>
 
@@ -36,8 +36,8 @@
       <div id="header">
         <div id="menu">
   
-    <a href="../_index.html">Index (K)</a> &raquo;
-    <span class='title'><span class='object_link'><a href="../Processor.html" title="Processor (module)">Processor</a></span></span>
+    <a href="../../_index.html">Index (K)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../SSHKeyHub.html" title="SSHKeyHub (module)">SSHKeyHub</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Processor.html" title="SSHKeyHub::Processor (module)">Processor</a></span></span>
      &raquo; 
     <span class="title">KeysFilter</span>
   
@@ -46,7 +46,7 @@
         <div id="search">
   
     <a class="full_list_link" id="class_list_link"
-        href="../class_list.html">
+        href="../../class_list.html">
 
         <svg width="24" height="24">
           <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
@@ -59,9 +59,9 @@
         <div class="clear"></div>
       </div>
 
-      <iframe id="search_frame" src="../class_list.html"></iframe>
+      <iframe id="search_frame" src="../../class_list.html"></iframe>
 
-      <div id="content"><h1>Class: Processor::KeysFilter
+      <div id="content"><h1>Class: SSHKeyHub::Processor::KeysFilter
   
   
   
@@ -76,7 +76,7 @@
         <ul class="fullTree">
           <li>Object</li>
           
-            <li class="next">Processor::KeysFilter</li>
+            <li class="next">SSHKeyHub::Processor::KeysFilter</li>
           
         </ul>
         <a href="#" class="inheritanceTree">show all</a>
@@ -259,7 +259,7 @@ and EC below 256 bits.</p>
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(credentials = {})  &#x21d2; <tt><span class='object_link'><a href="" title="Processor::KeysFilter (class)">KeysFilter</a></span></tt> 
+    #<strong>initialize</strong>(credentials = {})  &#x21d2; <tt><span class='object_link'><a href="" title="SSHKeyHub::Processor::KeysFilter (class)">KeysFilter</a></span></tt> 
   
 
   
@@ -304,15 +304,15 @@ and EC below 256 bits.</p>
       <pre class="lines">
 
 
-8
 9
-10</pre>
+10
+11</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ssh_key_hub/processor/keys_filter.rb', line 8</span>
+      <pre class="code"><span class="info file"># File 'lib/ssh_key_hub/processor/keys_filter.rb', line 9</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_credentials'>credentials</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
-  <span class='ivar'>@credentials</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='ivar'>@credentials</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_deep_dup'>deep_dup</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -372,12 +372,12 @@ and EC below 256 bits.</p>
       <pre class="lines">
 
 
-14
 15
-16</pre>
+16
+17</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ssh_key_hub/processor/keys_filter.rb', line 14</span>
+      <pre class="code"><span class="info file"># File 'lib/ssh_key_hub/processor/keys_filter.rb', line 15</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add'>add</span><span class='lparen'>(</span><span class='id identifier rubyid_new_creds'>new_creds</span><span class='rparen'>)</span>
   <span class='ivar'>@credentials</span><span class='period'>.</span><span class='id identifier rubyid_merge!'>merge!</span><span class='lparen'>(</span><span class='id identifier rubyid_new_creds'>new_creds</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_old_val'>old_val</span><span class='comma'>,</span> <span class='id identifier rubyid_new_val'>new_val</span><span class='op'>|</span> <span class='id identifier rubyid_old_val'>old_val</span> <span class='op'>+</span> <span class='id identifier rubyid_new_val'>new_val</span> <span class='rbrace'>}</span>
@@ -413,13 +413,13 @@ and EC below 256 bits.</p>
       <pre class="lines">
 
 
-19
-20</pre>
+20
+21</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ssh_key_hub/processor/keys_filter.rb', line 19</span>
+      <pre class="code"><span class="info file"># File 'lib/ssh_key_hub/processor/keys_filter.rb', line 20</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_allow'>allow</span><span class='lparen'>(</span><span class='id identifier rubyid_type'>type</span><span class='comma'>,</span> <span class='id identifier rubyid_min_bits'>min_bits</span><span class='comma'>,</span> <span class='id identifier rubyid_max_bits'>max_bits</span><span class='op'>=</span><span class='ivar'>@infinity</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_allow'>allow</span><span class='lparen'>(</span><span class='id identifier rubyid_type'>type</span><span class='comma'>,</span> <span class='id identifier rubyid_min_bits'>min_bits</span><span class='comma'>,</span> <span class='id identifier rubyid_max_bits'>max_bits</span> <span class='op'>=</span> <span class='ivar'>@infinity</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -452,13 +452,13 @@ and EC below 256 bits.</p>
       <pre class="lines">
 
 
-23
-24</pre>
+24
+25</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ssh_key_hub/processor/keys_filter.rb', line 23</span>
+      <pre class="code"><span class="info file"># File 'lib/ssh_key_hub/processor/keys_filter.rb', line 24</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_reject'>reject</span><span class='lparen'>(</span><span class='id identifier rubyid_type'>type</span><span class='comma'>,</span> <span class='id identifier rubyid_min_bits'>min_bits</span><span class='op'>=</span><span class='int'>0</span><span class='comma'>,</span> <span class='id identifier rubyid_max_bits'>max_bits</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_reject'>reject</span><span class='lparen'>(</span><span class='id identifier rubyid_type'>type</span><span class='comma'>,</span> <span class='id identifier rubyid_min_bits'>min_bits</span> <span class='op'>=</span> <span class='int'>0</span><span class='comma'>,</span> <span class='id identifier rubyid_max_bits'>max_bits</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -510,7 +510,6 @@ and EC below 256 bits</p>
       <pre class="lines">
 
 
-29
 30
 31
 32
@@ -528,15 +527,17 @@ and EC below 256 bits</p>
 44
 45
 46
-47</pre>
+47
+48
+49</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ssh_key_hub/processor/keys_filter.rb', line 29</span>
+      <pre class="code"><span class="info file"># File 'lib/ssh_key_hub/processor/keys_filter.rb', line 30</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reject_weak'>reject_weak</span>
   <span class='ivar'>@credentials</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_user'>user</span><span class='comma'>,</span> <span class='id identifier rubyid_keys'>keys</span><span class='op'>|</span>
     <span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_key'>key</span><span class='op'>|</span>
-      <span class='id identifier rubyid_type'>type</span><span class='comma'>,</span> <span class='id identifier rubyid_bits'>bits</span> <span class='op'>=</span> <span class='const'>Processor</span><span class='op'>::</span><span class='const'>KeyProcessor</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_key_type_and_bits'>key_type_and_bits</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_type'>type</span><span class='comma'>,</span> <span class='id identifier rubyid_bits'>bits</span> <span class='op'>=</span> <span class='const'>SSHKeyHub</span><span class='op'>::</span><span class='const'>Processor</span><span class='op'>::</span><span class='const'>KeyProcessor</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_key_type_and_bits'>key_type_and_bits</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span>
       <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>testing </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_type'>type</span><span class='embexpr_end'>}</span><span class='tstring_content'> with </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_bits'>bits</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
       <span class='kw'>case</span> <span class='id identifier rubyid_type'>type</span>
       <span class='kw'>when</span> <span class='symbol'>:DSA</span>
@@ -546,7 +547,8 @@ and EC below 256 bits</p>
       <span class='kw'>when</span> <span class='symbol'>:EC</span>
         <span class='id identifier rubyid_bits'>bits</span> <span class='op'>&lt;</span> <span class='int'>256</span>
       <span class='kw'>else</span>
-        <span class='kw'>true</span>
+        <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[KeysFilter] Allowing UNRECOGNIZED key </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_key'>key</span><span class='embexpr_end'>}</span><span class='tstring_content'> for </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_user'>user</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+        <span class='kw'>false</span>
       <span class='kw'>end</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
@@ -562,7 +564,7 @@ and EC below 256 bits</p>
 </div>
 
       <div id="footer">
-  Generated on Sun Mar 19 02:59:49 2017 by
+  Generated on Tue Aug  1 23:47:19 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.5 (ruby-2.3.3).
 </div>

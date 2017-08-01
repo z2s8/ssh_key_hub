@@ -4,31 +4,31 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>
-  Class: Processor::KeyProcessor
+  Class: SSHKeyHub::Processor::KeyProcessor
   
     &mdash; Documentation by YARD 0.9.5
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" charset="utf-8" />
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" charset="utf-8" />
 
 <script type="text/javascript" charset="utf-8">
-  pathId = "Processor::KeyProcessor";
-  relpath = '../';
+  pathId = "SSHKeyHub::Processor::KeyProcessor";
+  relpath = '../../';
 </script>
 
 
-  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
 
-  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
 
 
   </head>
   <body>
     <div class="nav_wrap">
-      <iframe id="nav" src="../class_list.html"></iframe>
+      <iframe id="nav" src="../../class_list.html"></iframe>
       <div id="resizer"></div>
     </div>
 
@@ -36,8 +36,8 @@
       <div id="header">
         <div id="menu">
   
-    <a href="../_index.html">Index (K)</a> &raquo;
-    <span class='title'><span class='object_link'><a href="../Processor.html" title="Processor (module)">Processor</a></span></span>
+    <a href="../../_index.html">Index (K)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../SSHKeyHub.html" title="SSHKeyHub (module)">SSHKeyHub</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Processor.html" title="SSHKeyHub::Processor (module)">Processor</a></span></span>
      &raquo; 
     <span class="title">KeyProcessor</span>
   
@@ -46,7 +46,7 @@
         <div id="search">
   
     <a class="full_list_link" id="class_list_link"
-        href="../class_list.html">
+        href="../../class_list.html">
 
         <svg width="24" height="24">
           <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
@@ -59,9 +59,9 @@
         <div class="clear"></div>
       </div>
 
-      <iframe id="search_frame" src="../class_list.html"></iframe>
+      <iframe id="search_frame" src="../../class_list.html"></iframe>
 
-      <div id="content"><h1>Class: Processor::KeyProcessor
+      <div id="content"><h1>Class: SSHKeyHub::Processor::KeyProcessor
   
   
   
@@ -76,7 +76,7 @@
         <ul class="fullTree">
           <li>Object</li>
           
-            <li class="next">Processor::KeyProcessor</li>
+            <li class="next">SSHKeyHub::Processor::KeyProcessor</li>
           
         </ul>
         <a href="#" class="inheritanceTree">show all</a>
@@ -303,12 +303,14 @@
 26
 27
 28
-29</pre>
+29
+30
+31</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/ssh_key_hub/processor/key_processor.rb', line 17</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_key_bits'>key_bits</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_pkey'>pkey</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_key_bits'>key_bits</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_pkey'>pkey</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_pkey'>pkey</span> <span class='op'>||=</span> <span class='const'>Net</span><span class='op'>::</span><span class='const'>SSH</span><span class='op'>::</span><span class='const'>KeyFactory</span><span class='period'>.</span><span class='id identifier rubyid_load_data_public_key'>load_data_public_key</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span> <span class='kw'>rescue</span> <span class='kw'>nil</span>
   <span class='kw'>case</span> <span class='id identifier rubyid_pkey'>pkey</span>
   <span class='kw'>when</span> <span class='const'>OpenSSL</span><span class='op'>::</span><span class='const'>PKey</span><span class='op'>::</span><span class='const'>RSA</span>
@@ -318,7 +320,9 @@
   <span class='kw'>when</span> <span class='const'>OpenSSL</span><span class='op'>::</span><span class='const'>PKey</span><span class='op'>::</span><span class='const'>EC</span>
     <span class='kw'>return</span> <span class='id identifier rubyid_pkey'>pkey</span><span class='period'>.</span><span class='id identifier rubyid_group'>group</span><span class='period'>.</span><span class='id identifier rubyid_degree'>degree</span>
   <span class='kw'>else</span>
-    <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Unknown key type: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_pkey'>pkey</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+    <span class='comment'># Currently Ed25519 keys aren&#39;t supported by Ruby&#39;s OpenSSL library
+</span>    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[KeyProcessor] Unknown key type for: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_key'>key</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>return</span> <span class='op'>-</span><span class='int'>1</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -419,7 +423,7 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/ssh_key_hub/processor/key_processor.rb', line 9</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_key_type'>key_type</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_pkey'>pkey</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_key_type'>key_type</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_pkey'>pkey</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_pkey'>pkey</span> <span class='op'>||=</span> <span class='const'>Net</span><span class='op'>::</span><span class='const'>SSH</span><span class='op'>::</span><span class='const'>KeyFactory</span><span class='period'>.</span><span class='id identifier rubyid_load_data_public_key'>load_data_public_key</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span> <span class='kw'>rescue</span> <span class='kw'>nil</span>
   <span class='kw'>return</span> <span class='symbol'>:UNKNOWN</span> <span class='kw'>if</span> <span class='id identifier rubyid_pkey'>pkey</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='symbol'>:#{</span><span class='id identifier rubyid_pkey'>pkey</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>::</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_last'>last</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
@@ -511,17 +515,17 @@
       <pre class="lines">
 
 
-33
-34
 35
-36</pre>
+36
+37
+38</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ssh_key_hub/processor/key_processor.rb', line 33</span>
+      <pre class="code"><span class="info file"># File 'lib/ssh_key_hub/processor/key_processor.rb', line 35</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_key_type_and_bits'>key_type_and_bits</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_pkey'>pkey</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_key_type_and_bits'>key_type_and_bits</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_pkey'>pkey</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_pkey'>pkey</span> <span class='op'>||=</span> <span class='const'>Net</span><span class='op'>::</span><span class='const'>SSH</span><span class='op'>::</span><span class='const'>KeyFactory</span><span class='period'>.</span><span class='id identifier rubyid_load_data_public_key'>load_data_public_key</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span> <span class='kw'>rescue</span> <span class='kw'>nil</span>
-  <span class='lbracket'>[</span><span class='id identifier rubyid_key_type'>key_type</span><span class='lparen'>(</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_pkey'>pkey</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_key_bits'>key_bits</span><span class='lparen'>(</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_pkey'>pkey</span><span class='rparen'>)</span><span class='rbracket'>]</span>
+  <span class='lbracket'>[</span><span class='id identifier rubyid_key_type'>key_type</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_pkey'>pkey</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_key_bits'>key_bits</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_pkey'>pkey</span><span class='rparen'>)</span><span class='rbracket'>]</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -533,7 +537,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Mar 19 02:59:49 2017 by
+  Generated on Tue Aug  1 23:47:19 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.5 (ruby-2.3.3).
 </div>

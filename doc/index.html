@@ -60,7 +60,7 @@
       <iframe id="search_frame" src="class_list.html"></iframe>
 
       <div id="content"><div id='filecontents'>
-<h1 id="label-SSH+Key+Hub+version-3A+pre-alpha-21">SSH Key Hub <code>version: pre-alpha!</code></h1>
+<h1 id="label-SSH+Key+Hub+version-3A+pre-alpha-21+api+docs">SSH Key Hub <code>version: pre-alpha!</code> <a href="https://z2s8.github.io/ssh_key_hub/doc/top-level-namespace.html">api docs</a></h1>
 
 <p>This project aims to make SSH Key management easier for teams, while
 introducing very little overhead.</p>
@@ -82,10 +82,30 @@ just prepares the user credentials for use with common SSH servers, such as
 
 <h2 id="label-Example+run">Example run</h2>
 
-<pre class="code ruby"><code class="ruby">require_relative &#39;provider/github&#39;
-require_relative &#39;processor/keys_filter&#39;
+<h3 id="label-Using+the+DSL">Using the DSL</h3>
 
-creds = Provider::GitHub.new.keys_for_org_team &#39;namewip&#39;, &#39;Owners&#39;
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>ssh_key_hub</span><span class='tstring_end'>&#39;</span></span>
+<span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>ssh_key_hub/dsl</span><span class='tstring_end'>&#39;</span></span>
+
+<span class='const'>Keys</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='kw'>do</span>
+  <span class='comment'># get keys from gitlab:
+</span>  <span class='id identifier rubyid_gitlab'>gitlab</span> <span class='label'>group:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>gitlab-org</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>project:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>gitlab-ce</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>private_token:</span> <span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>GITLAB_TOKEN</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
+  
+  <span class='comment'># get keys from github and then filter these keys only:
+</span>  <span class='id identifier rubyid_github'>github</span> <span class='label'>org:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>namewip</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>access_token:</span> <span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>GITHUB_TOKEN</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='kw'>do</span>
+    <span class='id identifier rubyid_reject_weak'>reject_weak</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># export all keys regardless of origin:
+</span>  <span class='id identifier rubyid_export'>export</span>
+<span class='kw'>end</span>
+</code></pre>
+
+<h3 id="label-Using+the+lower+level+API">Using the lower level API</h3>
+
+<pre class="code ruby"><code class="ruby">require_relative &#39;ssh_key_hub&#39;
+
+creds = SSHKeyHub::Provider::GitHub.new(access_token: ENV[&#39;GITHUB_TOKEN&#39;]).keys_for_org_team &#39;namewip&#39;, &#39;Owners&#39;
 =&gt; {&quot;z2s8&quot;=&gt;
   &lt;SortedSet: {&quot;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCxY1j...Mn2zd&quot;, # RSA 1024
                &quot;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDEVFI...2JQ==&quot;} # RSA 4096
@@ -99,9 +119,10 @@ Processor::KeysFilter.new(creds).reject_weak
 
 <h2 id="label-Current+providers">Current providers</h2>
 <ul><li>
-<p><strong>GitHub:</strong> <code>whole_org</code>, <code>org_team</code></p>
+<p><strong>GitHub:</strong> <em>whole organization</em>, <em>organization
+team</em></p>
 </li><li>
-<p><strong>GitLab:</strong> <code>whole_group</code></p>
+<p><strong>GitLab:</strong> <em>whole group</em>, <em>group project</em></p>
 </li><li>
 <p><em>and more coming!</em></p>
 </li></ul>
@@ -121,7 +142,7 @@ Processor::KeysFilter.new(creds).reject_weak
 </div></div>
 
       <div id="footer">
-  Generated on Sun Mar 19 02:59:49 2017 by
+  Generated on Tue Aug  1 23:47:19 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.5 (ruby-2.3.3).
 </div>
