@@ -50,8 +50,8 @@ class Keys
     end
   end
 
-  def gitlab(group:, **kwargs)
+  def gitlab(group:, project: nil, **kwargs)
     gl = SSHKeyHub::Provider::GitLab.new(kwargs)
-    add gl.keys_for_whole_group(group)
+    add gl.keys_for(group, project)
   end
 end

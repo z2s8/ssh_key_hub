@@ -24,9 +24,12 @@ module SSHKeyHub::Provider
       keys_for_members(@client.group_members(group))
     end
 
-    # TODO
+    # @param (see #keys_for_whole_group)
+    # @param [String] GitLab project
+    # @return (see #keys_for_whole_group)
     def keys_for_group_project(group, project)
-      #
+      users = @client.team_members "#{group}/#{project}"
+      keys_for_members users
     end
 
     def keys_for(group, project = nil)
